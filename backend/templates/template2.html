@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chinese New Year Celebration</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f7e8d3;
+      color: #333;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #f7e8d3;
+    }
+
+    .header nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px;
+      background-color: #fdf3e7;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .hero button {
+      background-color: #f76d3c;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .hero img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 10px;
+    }
+
+    .art-section {
+      text-align: center;
+      padding: 40px;
+      background-color: #fff0dc;
+    }
+
+    .art-section h2 {
+      color: #f76d3c;
+    }
+
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .art-grid img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .splendor-section {
+      text-align: center;
+      padding: 40px;
+      background-color: #fdf3e7;
+    }
+
+    .splendor-section img {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    .footer {
+      background-color: #333;
+      color: #f7e8d3;
+      padding: 20px;
+    }
+
+    .footer-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-info h3 {
+      margin-bottom: 10px;
+    }
+
+    .footer-info p,
+    .footer-info ul {
+      margin-bottom: 10px;
+    }
+
+    .footer-info ul {
+      list-style: none;
+    }
+
+    .footer-info ul li a {
+      text-decoration: none;
+      color: #f7e8d3;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Your Logo</h1>
+    <nav>
+      <a id="e1" href="#">Artists</a>
+      <a id="e2" href="#">Creative</a>
+      <a id="e3" href="#">Visit Site</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 id="e4">Celebrate the Vibrance of Chinese New Year</h1>
+      <button id="e4">Click to see the Masterpiece</button>
+      <img id="e5" src="data:image/jpeg;base64,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" alt="Chinese New Year Art" />
+    </section>
+
+    <section class="art-section">
+      <h2 id="e6">Art and Culture</h2>
+      <h3 id="e7">Festive Flourish Celebration</h3>
+      <div class="art-grid">
+        <img id="e8" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqYQ6Xll80meJxFukQ9G4i7_Bjb8kS-qkqyA&s" alt="Artwork 1" />
+        <img id="e9" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqYQ6Xll80meJxFukQ9G4i7_Bjb8kS-qkqyA&s" alt="Artwork 2" />
+        <img id="e10" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqYQ6Xll80meJxFukQ9G4i7_Bjb8kS-qkqyA&s" alt="Artwork 3" />
+        <img id="e11" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqYQ6Xll80meJxFukQ9G4i7_Bjb8kS-qkqyA&s" alt="Artwork 4" />
+      </div>
+    </section>
+
+    <section class="splendor-section">
+      <h2 id="e12">A Majestic Celebration of Chinese New Year's Artistic Splendor</h2>
+      <p id="e13">
+        Peel back the layers of tradition and discover the intricate symbolism
+        embodied in the celebration of Chinese New Year.
+      </p>
+      <button id="e14">View the Cultural Splendor</button>
+      <img id="e15" src="data:image/jpeg;base64,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" alt="Featured Art" />
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-info">
+      <div class="about">
+        <h3 id="e16">About Us</h3>
+        <p id="e17">Learn about our vision and mission.</p>
+      </div>
+      <div class="links">
+        <h3 id="e18">Links</h3>
+        <ul>
+          <li><a id="e19" href="#">Home</a></li>
+          <li><a id="e20" href="#">Gallery</a></li>
+          <li><a id="e21" href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h3 id="e22">Contact</h3>
+        <p id="e23">Email: info@example.com</p>
+        <p id="e24">Phone: +123 456 789</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
