@@ -7,6 +7,6 @@ const SaveStateSchema = new mongoose.Schema({
 });
 
 
-const SaveState = mongoose.model('ModelName', SaveStateSchema);
+const SaveState = mongoose.model('SaveState', SaveStateSchema);
 
 module.exports = SaveState;
