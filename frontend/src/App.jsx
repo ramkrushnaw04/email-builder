@@ -1,5 +1,4 @@
 
-import Template from "./components/template"
 import EditingPage from "./pages/EditingPage"
 import TemplateSelection from "./pages/templateSelection"
 import { Routes, Route, Link } from 'react-router-dom';
