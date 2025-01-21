@@ -1,7 +1,7 @@
 
 import EditingPage from "./pages/EditingPage"
-import TemplateSelection from "./pages/templateSelection"
-import { Routes, Route, Link } from 'react-router-dom';
+import TemplateSelection from "./pages/TemplateSelection"
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
 
