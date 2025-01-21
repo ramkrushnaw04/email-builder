@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Template from '../components/template'
+import Template from '../components/Template'
 import axios from 'axios'
 
 const TemplateSelection = () => {
