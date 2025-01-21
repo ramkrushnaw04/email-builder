@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import { BrowserRouter as Router, useParams } from 'react-router-dom';
 import axios from "axios"
+import ImageSelector from '../components/ImageSelector';
+import { toast } from 'react-toastify';
 
 const EditingPage = () => {
     const { template } = useParams()
@@ -10,7 +12,7 @@ const EditingPage = () => {
     const inputRef = useRef(null)
     const linkRef = useRef(null)
     const [imageLink, setImageLink] = useState("")
-    const [mobile, setMobile] = useState(true)
+    const [mobile, setMobile] = useState(false)
 
     // for additional settings menu
     const [isLink, setIsLink] = useState(false)
@@ -21,7 +23,7 @@ const EditingPage = () => {
     useEffect(() => {
         axios.get(import.meta.env.VITE_BACKEND_URL + '/getEmailLayput', {
             params: {
-                template: template
+                template: template 
             }
         })
             .then(res => setHtmlContent(res.data))
@@ -32,11 +34,11 @@ const EditingPage = () => {
     useEffect(() => {
         axios.get(import.meta.env.VITE_BACKEND_URL + '/getSavedChanges', {
             params: {
-                template: template+'.html'
+                template: template
             }
         })
             .then(res => {
-                changes.current = res.data.changes
+                changes.current = res.data
             })
             .catch(err => console.log(err))
     }, [])
@@ -104,7 +106,7 @@ const EditingPage = () => {
     function downloadFile() {
         axios.post(import.meta.env.VITE_BACKEND_URL + '/renderAndDownloadTemplate', {
             changes: changes.current,
-            template: template + '.html'
+            template: template 
         })
             .then(res => {
                 const updatedHtml = res.data
@@ -112,7 +114,7 @@ const EditingPage = () => {
                 const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.href = url;
-                link.download = template+'.html';
+                link.download = template
                 link.click();
                 URL.revokeObjectURL(url);
             })
@@ -123,16 +125,18 @@ const EditingPage = () => {
     function saveChangesToDB() {
         axios.post(import.meta.env.VITE_BACKEND_URL + '/uploadEmailConfig', {
             changes: changes.current,
-            template: template + '.html'
+            template: template 
         })
-            .then(res => console.log(res.status))
+            .then(() => {
+                toast('Saved!')
+            })
             .catch(err => console.log(err))
     }
 
     function loadChanges() {
         axios.get(import.meta.env.VITE_BACKEND_URL + '/loadTemplateWithChanges', {
             params: {
-                template: template+'.html'
+                template: template
             }
         })
             .then(res => {
@@ -145,21 +149,22 @@ const EditingPage = () => {
     function resetTemplate() {
         axios.get(import.meta.env.VITE_BACKEND_URL + '/getEmailLayput', {
             params: {
-                template: template
+                template: template 
             }
         })
             .then(res => {
                 setHtmlContent(res.data)
                 changes.current = {}
+                toast('Template reset successful')
             })
             .catch(err => console.log(err))
     }
 
     return (
-        <div className="w-screen h-screen flex flex-col sm:flex-row bg-gray-50">
+        <div className="w-screen h-screen flex flex-col sm:flex-row bg-gray-50 relative">
 
             {/* canvas */}
-            <main className="sm:h-full flex-1 relative bg-white flex justify-center items-center p-4 border-r border-gray-300 shadow-md">
+            <main className=" h-[70%] sm:flex-1 sm:h-full relative bg-white flex justify-center items-center p-0 sm:p-2 border-r border-gray-300 ">
 
                 {/* button to switch between mobile and desktop view */}
                 <button
@@ -180,11 +185,11 @@ const EditingPage = () => {
                 ></section>
             </main>
 
-            {/* controls or placeholder */}
-            <aside className="h-[200px] sm:h-full w-screen sm:w-[400px] bg-gray-100 sm:shadow-lg sm:border-l sm:border-gray-300 flex flex-col ">
+            {/* controls */}
+            <aside className="h-[200px] overflow-scroll flex-1 sm:flex-none sm:h-full w-screen sm:w-[250px] md:w-[350px]  bg-gray-100 sm:shadow-lg sm:border-l sm:border-gray-300 flex flex-col ">
 
                 {/* Top control bar */}
-                <section className="w-full h-[70px] bg-gray-200 flex justify-center items-center gap-2 shadow-sm mb-3">
+                <section className="w-full h-auto py-10 flex-wrap bg-gray-200 flex justify-center items-center gap-2 shadow-sm mb-3">
                     <button 
                         className="flex group items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md px-3 py-2 shadow-md transition-all duration-300"
                         onClick={saveChangesToDB}
@@ -246,18 +251,14 @@ const EditingPage = () => {
 
                         {/* Image preview and URL */}
                         {isImage && (
-                            <div className="w-full px-4 py-2 flex flex-col justify-between gap-2 items-center">
+                            <div className="w-full px-4 py-2 flex flex-col gap-1">
+                                <h6 className='text-sm font-bold text-gray-900 ml-1'>Image Preview</h6>
                                 <img
                                     className="w-full rounded-md border border-gray-300 shadow-sm"
-                                    src={imageLink}
+                                    src={imageLink ? imageLink : "/icons/preview.png"}
                                     alt="Preview"
                                 />
-                                <textarea
-                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
-                                    placeholder="Image URL"
-                                    value={imageLink}
-                                    onChange={(e) => setImageLink(e.target.value)}
-                                ></textarea>
+                                <ImageSelector setImageLink={setImageLink} />
                             </div>
                         )}
 
@@ -272,9 +273,9 @@ const EditingPage = () => {
                         </div>
                     </>
                 ) : (
-                    <div className="h-full flex flex-col justify-center items-center text-gray-600 bg-gray-100">
+                    <div className="h-full flex flex-col justify-center items-center text-gray-600 bg-gray-100 mx-10 text-center">
                         <p className="text-2xl font-semibold text-gray-700 mb-4">No Component Selected</p>
-                        <p className="text-lg text-gray-500 text-center">
+                        <p className="text-lg text-gray-500 ">
                             Click on a component in the canvas to start editing.
                         </p>
 

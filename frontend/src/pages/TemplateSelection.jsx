@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Template from '../components/template'
+import axios from 'axios'
 
 const TemplateSelection = () => {
+    const [templates, setTemplates] = useState([])
+
+    // fetch template names
+    useEffect(() => {
+        axios.get(import.meta.env.VITE_BACKEND_URL + '/getTemplates')
+            .then(res => {
+                setTemplates(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
     return (
         <body className=" bg-orange-200 min-h-screen">
             <main className="flex flex-col items-center justify-center p-6 min-h-screen">
@@ -11,13 +23,13 @@ const TemplateSelection = () => {
                 </h1>
 
                 {/* Template Section */}
-                <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full max-w-6xl px-4">
-                    <Template name="template1" />
-                    <Template name="template1" />
-                    <Template name="template2" />
-                    <Template name="template2" />
-                    <Template name="template2" />
-                </section>
+                <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full max-w-6xl px-4"> {
+                    templates.map(item => {
+                        return  <Template key={item} name={item} />
+                    })
+                } </section>
+
+
             </main>
         </body>
     )

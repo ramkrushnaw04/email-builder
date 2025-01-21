@@ -29,7 +29,7 @@ const Template = ({ name }) => {
 
     return (
         <button
-            className="max-h-[400px] overflow-hidden max-w-[300px] bg-gray-100 hover:bg-gray-200 rounded-md shadow-md relative transition-all duration-300 ease-in-out border border-gray-300 group"
+            className="max-h-[400px] overflow-hidden max-w-[300px] m-auto bg-gray-100 hover:bg-gray-200 rounded-md shadow-md relative transition-all duration-300 ease-in-out border border-gray-300 group"
             onClick={navigateTo}
         >
             {/* Main Content */}
