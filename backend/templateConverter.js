@@ -3,7 +3,6 @@ const path = require('path')
 const { JSDOM } = require('jsdom');
 
 function convert(template, changes) {
-    console.log(template, changes)
     const templatePath = path.join(__dirname, 'templates/'+template)
     const data = fs.readFileSync(templatePath, 'utf8');
 
