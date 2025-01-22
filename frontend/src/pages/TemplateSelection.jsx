@@ -23,7 +23,7 @@ const TemplateSelection = () => {
                 </h1>
 
                 {/* Template Section */}
-                <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 w-full max-w-6xl px-4"> {
+                <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-6xl px-4"> {
                     templates.map(item => {
                         return  <Template key={item} name={item} />
                     })

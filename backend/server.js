@@ -113,10 +113,7 @@ app.post('/deleteImage', async (req, res) => {
 
 
 app.get('/test', (req, res) => {
-    setTimeout(() => {
-        res.send('MailCraft Server is running...')
-        
-    }, 2000);
+    res.send('MailCraft Server is running...')
 })
 
 app.listen(port, () => {
