@@ -12,6 +12,8 @@ app.use(cors({
     origin: process.env.FRONTEND_URL
 }))
 
+const port = process.env.PORT || 3000;
+
 
 const SaveState = require('./schemas/saveState')
 const Image = require('./schemas/image')
@@ -110,10 +112,13 @@ app.post('/deleteImage', async (req, res) => {
 })
 
 
-app.get('/', (req, res) => {
-    console.log('running...')
+app.get('/test', (req, res) => {
+    setTimeout(() => {
+        res.send('MailCraft Server is running...')
+        
+    }, 2000);
 })
 
-app.listen((process.env.PORT || 3000), () => {
+app.listen(port, () => {
     console.log('running...')
 })

@@ -28,8 +28,6 @@ const TemplateSelection = () => {
                         return  <Template key={item} name={item} />
                     })
                 } </section>
-
-
             </main>
         </body>
     )
